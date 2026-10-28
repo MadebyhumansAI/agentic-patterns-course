@@ -1,14 +1,12 @@
 from colorama import Fore
-from dotenv import load_dotenv
 from groq import Groq
 
+from agentic_patterns.utils.config import DEFAULT_MODEL
 from agentic_patterns.utils.completions import build_prompt_structure
 from agentic_patterns.utils.completions import completions_create
 from agentic_patterns.utils.completions import FixedFirstChatHistory
 from agentic_patterns.utils.completions import update_chat_history
 from agentic_patterns.utils.logging import fancy_step_tracker
-
-load_dotenv()
 
 
 BASE_GENERATION_SYSTEM_PROMPT = """
@@ -35,7 +33,7 @@ class ReflectionAgent:
         client (Groq): An instance of the Groq client to interact with the language model.
     """
 
-    def __init__(self, model: str = "openai/gpt-oss-20b"):
+    def __init__(self, model: str = DEFAULT_MODEL):
         self.client = Groq()
         self.model = model
 

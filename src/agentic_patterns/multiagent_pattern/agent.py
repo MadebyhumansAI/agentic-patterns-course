@@ -3,6 +3,7 @@ from textwrap import dedent
 from agentic_patterns.multiagent_pattern.crew import Crew
 from agentic_patterns.planning_pattern.react_agent import ReactAgent
 from agentic_patterns.tool_pattern.tool import Tool
+from agentic_patterns.utils.config import DEFAULT_MODEL
 
 
 class Agent:
@@ -28,7 +29,7 @@ class Agent:
         task_description (str): A description of the task assigned to the agent.
         task_expected_output (str, optional): The expected format or content of the task output. Defaults to "".
         tools (list[Tool] | None, optional): A list of Tool instances available to the agent. Defaults to None.
-        llm (str, optional): The name of the language model to use. Defaults to "llama-3.3-70b-versatile".
+        llm (str, optional): The model to use; defaults to ``MODEL`` from the environment.
     """
 
     def __init__(
@@ -38,7 +39,7 @@ class Agent:
         task_description: str,
         task_expected_output: str = "",
         tools: list[Tool] | None = None,
-        llm: str = "llama-3.3-70b-versatile",
+        llm: str = DEFAULT_MODEL,
     ):
         self.name = name
         self.backstory = backstory

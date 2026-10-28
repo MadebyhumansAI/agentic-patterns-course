@@ -2,18 +2,16 @@ import json
 import re
 
 from colorama import Fore
-from dotenv import load_dotenv
 from groq import Groq
 
 from agentic_patterns.tool_pattern.tool import Tool
 from agentic_patterns.tool_pattern.tool import validate_arguments
+from agentic_patterns.utils.config import DEFAULT_MODEL
 from agentic_patterns.utils.completions import build_prompt_structure
 from agentic_patterns.utils.completions import ChatHistory
 from agentic_patterns.utils.completions import completions_create
 from agentic_patterns.utils.completions import update_chat_history
 from agentic_patterns.utils.extraction import extract_tag_content
-
-load_dotenv()
 
 BASE_SYSTEM_PROMPT = ""
 
@@ -64,7 +62,7 @@ class ReactAgent:
 
     Attributes:
         client (Groq): The Groq client used to handle model-based completions.
-        model (str): The name of the model used for generating responses. Default is "llama-3.3-70b-versatile".
+        model (str): The model used for responses; defaults to ``MODEL`` from the environment.
         tools (list[Tool]): A list of Tool instances available for execution.
         tools_dict (dict): A dictionary mapping tool names to their corresponding Tool instances.
     """
@@ -72,7 +70,7 @@ class ReactAgent:
     def __init__(
         self,
         tools: Tool | list[Tool],
-        model: str = "llama-3.3-70b-versatile",
+        model: str = DEFAULT_MODEL,
         system_prompt: str = BASE_SYSTEM_PROMPT,
     ) -> None:
         self.client = Groq()
