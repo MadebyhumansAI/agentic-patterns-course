@@ -1,4 +1,5 @@
 import json
+import os
 import re
 
 from colorama import Fore
@@ -51,7 +52,7 @@ class ToolAgent:
     def __init__(
         self,
         tools: Tool | list[Tool],
-        model: str = "llama-3.3-70b-versatile",
+        model: str = os.getenv("MODEL", "openai/gpt-oss-20b"),
     ) -> None:
         self.client = Groq()
         self.model = model
